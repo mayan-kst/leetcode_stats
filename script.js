@@ -10,8 +10,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const mediumLabel = document.getElementById("medium-label");
     const hardLabel = document.getElementById("hard-label");
     const cardStatsContainer = document.querySelector(".stats-cards");
+    const historyBox = document.getElementById("history");
+    const searches   = JSON.parse(localStorage.getItem("searches") || "[]");
+    historyBox.textContent = searches.join(", ");
+
 
     function validateUsername(username) {
+        searches.push(username);
+     localStorage.setItem("searches", JSON.stringify(searches));
+     historyBox.textContent = searches.join(", ");
+
         if(username.trim() === "") {
             alert("Username should not be empty");
             return false;
